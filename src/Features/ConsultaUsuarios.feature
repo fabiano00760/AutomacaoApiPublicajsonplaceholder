@@ -34,3 +34,6 @@ Feature: Consultar Usuários
     And o campo "email" no corpo da resposta deve ser igual a "dojo.karater@inmetrics.com.br"
 
     And o campo "id" no corpo da resposta deve ser igual a 3
+
+
+

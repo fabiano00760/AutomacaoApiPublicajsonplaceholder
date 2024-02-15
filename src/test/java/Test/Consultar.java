@@ -15,7 +15,7 @@ public class Consultar {
     static final String baseUrl = "https://jsonplaceholder.typicode.com/users";
     private static final String userId = "1"; // Você pode ajustar o id conforme necessário
 
-    @Test
+ //   @Test
     public void consultarTodosUsuarios() {
         given()
                 .baseUri(baseUrl)
@@ -27,7 +27,7 @@ public class Consultar {
 
     }
 
-    @Test
+ //   @Test
     public void consultarUsuarioEspecificoComId1() {
         Response response = given()
                 .baseUri(baseUrl)
@@ -53,7 +53,7 @@ public class Consultar {
         }
     }
 
-    @Test
+ //   @Test
     public void consultarUsuarioEspecificoComId2ValidandoRetorno() throws Exception {
         // Lê o conteúdo do arquivo JSON
         String expectedResponse = new String(readAllBytes(Paths.get("src/Data/response.json")));
@@ -79,7 +79,7 @@ public class Consultar {
         }
     }
 
-    @Test
+ //   @Test
     public void consultarUsuarioComId2ComQueryStringValidandoCampoEspecifico() {
                  Response response =
                  given()
@@ -106,7 +106,7 @@ public class Consultar {
         }
     }
 
-    @Test
+  //  @Test
     public void cadastrarUsuarioComSucesso() throws Exception {
         // Lê o conteúdo do arquivo JSON
         String expectedResponse = new String(Files.readAllBytes(Paths.get("src/Data/payloadFile.Json")));
@@ -139,7 +139,7 @@ public class Consultar {
 
     }
 
-    @Test
+  //  @Test
     public void atualizarUsuarioComId3() {
         Response response = given()
                 .baseUri(baseUrl)

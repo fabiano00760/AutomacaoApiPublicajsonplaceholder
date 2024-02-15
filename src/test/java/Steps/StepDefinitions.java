@@ -1,6 +1,7 @@
 package Steps;
 
 import io.cucumber.core.internal.com.fasterxml.jackson.databind.JsonNode;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;
@@ -18,6 +19,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.containsString;
@@ -25,7 +28,6 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 
 public class StepDefinitions {
-
     private String baseUrl = "https://jsonplaceholder.typicode.com/users";
     private Response response;
 
@@ -104,6 +106,7 @@ public class StepDefinitions {
     public void realizarRequisicaoPUTComCorpo(String endpoint, String requestBody) {
         this.response = given().baseUri(baseUrl).pathParam("id", endpoint).header("Content-Type", "application/json").body(requestBody).when().put("/{id}");
     }
+
     @When("realizar uma requisição GET para {string} com a query-string {string}")
     public void realizarRequisicaoGETComQueryString(String endpoint, String queryString) {
         this.response = given().baseUri(baseUrl)
@@ -125,4 +128,15 @@ public class StepDefinitions {
         this.response.then().body(campo, equalTo(valorEsperado));
     }
 
+    @Given("a base URL and headers:")
+    public void setBaseUrlAndHeaders(DataTable dataTable) {
+        List<Map<String, String>> data = dataTable.asMaps(String.class, String.class);
+        String baseUrl = data.get(0).get("url");
+        String contentType = data.get(0).get("content-type");
+    }
+
+    @When("realizar uma requisição DELETE para {string} com o ID {int}")
+    public void realizarRequisicaoDELETEComId(String endpoint, int id) {
+        this.response = given().baseUri(baseUrl).pathParam("id", id).when().delete("/{id}");
+    }
 }
